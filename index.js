@@ -25,12 +25,12 @@ const player = new (function () {
   this.img.src = "bike.png";
   this.draw = function () {
     const p1 = c.height - noise(t + this.x) * 0.25;
-    if (p1 - 15 > this.y) this.ySpeed -= 0.1;
+    if (p1 - 15 > this.y) this.ySpeed += 0.1;
     else {
+      this.ySpeed -= this.y - (p1 - 15);
       this.y = p1 - 15;
-      this.ySpeed = this.y - (p1 - 12);
     }
-    this.y -= this.ySpeed;
+    this.y += this.ySpeed;
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.drawImage(this.img, -15, -15, 30, 30);
