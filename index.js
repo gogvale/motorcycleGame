@@ -21,6 +21,13 @@ const player = new (function () {
   this.ySpeed = 0;
   this.rot = 0;
   this.rSpeed = 0;
+  this.reset = () => {
+    this.x = c.width / 2;
+    this.y = 0;
+    this.ySpeed = 0;
+    this.rot = 0;
+    this.rSpeed = 0;
+  };
 
   this.img = new Image();
   this.img.src = "bike.png";
@@ -70,6 +77,7 @@ let speed = 0;
 let playing = true;
 const k = { ArrowUp: 0, ArrowDown: 0, ArrowLeft: 0, ArrowRight: 0 };
 function loop() {
+  if (player.x < 0) player.reset();
   speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.01;
   t += 10 * speed;
   ctx.fillStyle = "#19f";
