@@ -1,6 +1,6 @@
 let values_arr = [];
 function randomValue(){
-  return Math.floor(Math.random() * 255)
+  return Math.floor(Math.random() * 768)
 }
 function toggleDebug(){
   a = document.getElementById("list_show");
@@ -58,19 +58,19 @@ function startGame(){
     this.reset();
     this.img = new Image();
     this.bg = new Image();
+    this.bgPosX = 0;
+    this.bgPosX1 = 1024;
     this.img.src = "img/scooter.png";
     this.bg.src = "img/backgroundForest.png";
     
-    
     this.draw = function () {
-      ctx.drawImage(this.bg, 0,0);
       const p1 = c.height - noise(t + this.x) * 0.25;
       const p2 = c.height - noise(t + 5 + this.x) * 0.25;
 
       let grounded = 0;
 
       if (p1 - 15 > this.y) {
-        this.ySpeed += 0.1;
+        this.ySpeed += 0.45;
       }
       else {
         this.ySpeed -= this.y - (p1 - 15);
@@ -104,7 +104,12 @@ function startGame(){
         !(grounded && 
           Math.abs(this.rot) > Math.PI * 0.5)) score.textContent = +score.textContent + 1;
 
+
+      
       ctx.save();
+      ctx.clearRect(0,0, 1024, 768);
+      ctx.drawImage(this.bg, this.bgPosX, 0);
+      ctx.drawImage(this.bg, this.bgPosX1,0);
       ctx.translate(this.x, this.y);
       ctx.rotate(this.rot);
       ctx.drawImage(this.img, -15, -15, 30, 30);
@@ -124,6 +129,14 @@ function startGame(){
     // ctx.fillRect(0, 0, c.width, c.height);
 
     player.draw();
+    player.bgPosX -= speed;
+    player.bgPosX1 -= speed;
+    if(player.bgPosX <= -1024) {
+      player.bgPosX = 1024;
+    }
+    if(player.bgPosX1 <= -1024) {
+      player.bgPosX1 = 1024;
+    }
 
     ctx.fillStyle = "white";
     ctx.beginPath();
