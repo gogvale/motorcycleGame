@@ -1,10 +1,16 @@
 let values_arr = [];
-function randomValue(){
-  return Math.floor(Math.random() * 768)
+function randomValue(R = 0,a=1,b=255){
+  return (a + (b - a) * R) % 500
 }
 function toggleDebug(){
   a = document.getElementById("list_show");
   a.hidden = !a.hidden;
+}
+
+function appendToList(ul,i){
+  li = document.createElement("li");
+  li.textContent = i;
+  ul.appendChild(li);
 }
 function startGame(){
   document.getElementById("title").remove();
@@ -22,14 +28,13 @@ function startGame(){
   c.height = 768;
   document.getElementById("start").appendChild(c);
 
-  let perm = [];
+  let perm = [randomValue(255)];
   const ul = document.getElementById("values_list")
+  appendToList(ul,perm[perm.length-1])
   while (perm.length < 255) {
-    i = randomValue();
+    i = randomValue(perm[perm.length-1]);
     perm.push(i);
-    li = document.createElement("li");
-    li.textContent = i;
-    ul.appendChild(li);
+    appendToList(ul,i)
   }
   values_arr = perm;
 
