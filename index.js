@@ -18,8 +18,13 @@ function startGame(){
   document.getElementById("start").appendChild(c);
 
   let perm = [];
+  const ul = document.getElementById("values_list")
   while (perm.length < 255) {
-    perm.push(randomValue());
+    i = randomValue();
+    perm.push(i);
+    li = document.createElement("li");
+    li.textContent = i;
+    ul.appendChild(li);
   }
   values_arr = perm;
 
