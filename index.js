@@ -88,8 +88,8 @@ function startGame(){
 
       
       ctx.save();
-      
-      ctx.drawImage(this.bg, this.bgPosX,0);
+      ctx.clearRect(0,0, 1024, 768);
+      ctx.drawImage(this.bg, this.bgPosX, 0);
       ctx.drawImage(this.bg, this.bgPosX1,0);
       ctx.translate(this.x, this.y);
       ctx.rotate(this.rot);
@@ -110,6 +110,14 @@ function startGame(){
     // ctx.fillRect(0, 0, c.width, c.height);
 
     player.draw();
+    player.bgPosX -= speed;
+    player.bgPosX1 -= speed;
+    if(player.bgPosX <= -1024) {
+      player.bgPosX = 1024;
+    }
+    if(player.bgPosX1 <= -1024) {
+      player.bgPosX1 = 1024;
+    }
 
     ctx.fillStyle = "white";
     ctx.beginPath();
