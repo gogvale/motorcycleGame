@@ -1,3 +1,4 @@
+let values_arr = [];
 function randomValue(){
   return Math.floor(Math.random() * 255)
 }
@@ -20,6 +21,7 @@ function startGame(){
   while (perm.length < 255) {
     perm.push(randomValue());
   }
+  values_arr = perm;
 
   const lerp = (a, b, t) => a + ((b - a) * (1 - Math.cos(t * Math.PI))) / 2;
   const noise = (x) => {
