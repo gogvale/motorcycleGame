@@ -1,5 +1,5 @@
 function randomValue(){
-  return Math.floor(Math.random() * 255)
+  return Math.floor(Math.random() * 2)
 }
 
 function startGame(){
@@ -7,6 +7,8 @@ function startGame(){
   document.getElementById("startButton").remove();
   document.getElementById("instructions").remove();
   document.getElementById("score").hidden = false;
+
+  const score = document.getElementById("score_number");
 
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
@@ -48,7 +50,9 @@ function startGame(){
 
       let grounded = 0;
 
-      if (p1 - 15 > this.y) this.ySpeed += 0.1;
+      if (p1 - 15 > this.y) {
+        this.ySpeed += 0.1;
+      }
       else {
         this.ySpeed -= this.y - (p1 - 15);
         this.y = p1 - 15;
@@ -74,6 +78,12 @@ function startGame(){
       this.rot -= this.rSpeed * 0.1;
       if (this.rot > Math.PI) this.rot = -Math.PI;
       if (this.rot < -Math.PI) this.rot = Math.PI;
+        
+      if(
+        this.rot !== 0 && 
+        this.y !== 0 && 
+        !(grounded && 
+          Math.abs(this.rot) > Math.PI * 0.5)) score.textContent = +score.textContent + 1;
 
       ctx.save();
       ctx.translate(this.x, this.y);
@@ -95,7 +105,7 @@ function startGame(){
     // ctx.fillRect(0, 0, c.width, c.height);
 
     player.draw();
-    
+
     ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.moveTo(0, c.height);
