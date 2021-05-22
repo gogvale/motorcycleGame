@@ -1,5 +1,5 @@
 function randomValue(){
-  return Math.floor(Math.random() * 2)
+  return Math.floor(Math.random() * 768)
 }
 
 function startGame(){
@@ -41,17 +41,17 @@ function startGame(){
     this.bg = new Image();
     this.img.src = "scooter.png";
     this.bg.src = "backgroundForest.png";
-    
+    this.bgPosX = 0;
+    this.bgPosX1 = 1024;
     
     this.draw = function () {
-      ctx.drawImage(this.bg, 0,0);
       const p1 = c.height - noise(t + this.x) * 0.25;
       const p2 = c.height - noise(t + 5 + this.x) * 0.25;
 
       let grounded = 0;
 
       if (p1 - 15 > this.y) {
-        this.ySpeed += 0.1;
+        this.ySpeed += 0.45;
       }
       else {
         this.ySpeed -= this.y - (p1 - 15);
@@ -85,7 +85,12 @@ function startGame(){
         !(grounded && 
           Math.abs(this.rot) > Math.PI * 0.5)) score.textContent = +score.textContent + 1;
 
+
+      
       ctx.save();
+      
+      ctx.drawImage(this.bg, this.bgPosX,0);
+      ctx.drawImage(this.bg, this.bgPosX1,0);
       ctx.translate(this.x, this.y);
       ctx.rotate(this.rot);
       ctx.drawImage(this.img, -15, -15, 30, 30);
