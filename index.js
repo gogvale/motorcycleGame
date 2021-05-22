@@ -1,5 +1,5 @@
 function randomValue(){
-  return Math.floor(Math.random() * 2)
+  return Math.floor(Math.random() * 255)
 }
 
 function startGame(){
@@ -28,12 +28,19 @@ function startGame(){
   };
 
   const player = new (function () {
+    this.playedBefore = false;
     this.reset = () => {
+      if(this.playedBefore){
+        ans = confirm(`Fin de Juego. Tu puntaje fue de ${score.textContent}. Desea jugar otra vez?`)
+        if(!ans) gameOver()
+        else score.textContent = 0;
+      } 
       this.x = c.width / 2;
       this.y = 0;
       this.ySpeed = 0;
       this.rot = 0;
       this.rSpeed = 0;
+      this.playedBefore = true;
     };
 
     this.reset();
@@ -120,4 +127,8 @@ function startGame(){
   onkeyup = (d) => (k[d.key] = 0);
 
   loop();
+  function gameOver(){
+    c.remove();
+    document.getElementById("gameOver").style.visibility = "visible"
+  }
 }
