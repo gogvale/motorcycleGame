@@ -2,11 +2,16 @@ let values_arr = [];
 function randomValue(){
   return Math.floor(Math.random() * 255)
 }
-
+function toggleDebug(){
+  a = document.getElementById("list_show");
+  a.hidden = !a.hidden;
+}
 function startGame(){
   document.getElementById("title").remove();
   document.getElementById("startButton").remove();
   document.getElementById("instructions").remove();
+
+  document.getElementById("debug_btn").hidden = false;
   document.getElementById("score").hidden = false;
 
   const score = document.getElementById("score_number");
