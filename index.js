@@ -46,8 +46,8 @@ function startGame(){
     this.reset();
     this.img = new Image();
     this.bg = new Image();
-    this.img.src = "scooter.png";
-    this.bg.src = "backgroundForest.png";
+    this.img.src = "img/scooter.png";
+    this.bg.src = "img/backgroundForest.png";
     
     
     this.draw = function () {
@@ -119,6 +119,14 @@ function startGame(){
     for (let i = 0; i < c.width; i++)
       ctx.lineTo(i, c.height - noise(t + i) * 0.25);
     ctx.lineTo(c.width, c.height);
+    ctx.fill();
+
+    
+    ctx.fillStyle = "#a7d1d2";
+    ctx.beginPath();
+    ctx.moveTo(0, c.height/2);
+    ctx.lineTo(30, c.height );
+    ctx.lineTo(0, c.height );
     ctx.fill();
 
     requestAnimationFrame(loop);
