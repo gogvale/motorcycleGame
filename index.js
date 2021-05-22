@@ -1,11 +1,17 @@
+let values_arr = [];
 function randomValue(){
   return Math.floor(Math.random() * 768)
 }
-
+function toggleDebug(){
+  a = document.getElementById("list_show");
+  a.hidden = !a.hidden;
+}
 function startGame(){
   document.getElementById("title").remove();
   document.getElementById("startButton").remove();
   document.getElementById("instructions").remove();
+
+  document.getElementById("debug_btn").hidden = false;
   document.getElementById("score").hidden = false;
 
   const score = document.getElementById("score_number");
@@ -17,9 +23,15 @@ function startGame(){
   document.getElementById("start").appendChild(c);
 
   let perm = [];
+  const ul = document.getElementById("values_list")
   while (perm.length < 255) {
-    perm.push(randomValue());
+    i = randomValue();
+    perm.push(i);
+    li = document.createElement("li");
+    li.textContent = i;
+    ul.appendChild(li);
   }
+  values_arr = perm;
 
   const lerp = (a, b, t) => a + ((b - a) * (1 - Math.cos(t * Math.PI))) / 2;
   const noise = (x) => {
@@ -28,21 +40,28 @@ function startGame(){
   };
 
   const player = new (function () {
+    this.playedBefore = false;
     this.reset = () => {
+      if(this.playedBefore){
+        ans = confirm(`Fin de Juego. Tu puntaje fue de ${score.textContent}. Desea jugar otra vez?`)
+        if(!ans) gameOver()
+        else score.textContent = 0;
+      } 
       this.x = c.width / 2;
       this.y = 0;
       this.ySpeed = 0;
       this.rot = 0;
       this.rSpeed = 0;
+      this.playedBefore = true;
     };
 
     this.reset();
     this.img = new Image();
     this.bg = new Image();
-    this.img.src = "scooter.png";
-    this.bg.src = "backgroundForest.png";
     this.bgPosX = 0;
     this.bgPosX1 = 1024;
+    this.img.src = "img/scooter.png";
+    this.bg.src = "img/backgroundForest.png";
     
     this.draw = function () {
       const p1 = c.height - noise(t + this.x) * 0.25;
@@ -127,10 +146,22 @@ function startGame(){
     ctx.lineTo(c.width, c.height);
     ctx.fill();
 
+    
+    ctx.fillStyle = "#a7d1d2";
+    ctx.beginPath();
+    ctx.moveTo(0, c.height/2);
+    ctx.lineTo(30, c.height );
+    ctx.lineTo(0, c.height );
+    ctx.fill();
+
     requestAnimationFrame(loop);
   }
   onkeydown = (d) => (k[d.key] = 1);
   onkeyup = (d) => (k[d.key] = 0);
 
   loop();
+  function gameOver(){
+    c.remove();
+    document.getElementById("gameOver").style.visibility = "visible"
+  }
 }

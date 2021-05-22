@@ -1,3 +1,13 @@
 .icon{
     height: 1em;
 }
+#gameOver{
+    visibility: collapse;
+}
+#values_list{
+    max-height: 70vh;
+    overflow-y: auto;
+    width: 7em;
+    margin: 0 1em;
+    padding-left: 3em;
+}

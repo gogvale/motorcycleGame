@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="main.css">
   </head>
   <body class="container d-flex justify-content-center">
+    <div class="fixed-top" id="list_show" hidden>
+      <h2>Valores Calculados:</h2>
+      <ol id="values_list"></ol>
+    </div>
     <div id="start" class="d-flex flex-column justify-content-center mt-5">
       <h1 id="title">Bienvenido al juego de la moto!</h1>
       <button onclick="startGame()" id="startButton" class="btn btn-lg btn-primary my-3">Iniciar</button>
       <div id="instructions">
         <h2>Instrucciones:</h2>
         <ul>
-          <li>No deje que el motociclista choque contra las paredes</li>
+          <li>¡No deje que el motociclista choque contra la avalancha!</li>
           <li>Utiliza las direccionales (<img class="icon" src="vendor/fontawesome/arrow-left-solid.svg" alt="←">, <img class="icon" src="vendor/fontawesome/arrow-right-solid.svg" alt="→"> ) para dar vueltas y ganar puntos</li>
           <li>Utiliza las direccionales (<img class="icon" src="vendor/fontawesome/arrow-up-solid.svg" alt="↑">, <img class="icon" src="vendor/fontawesome/arrow-down-solid.svg" alt="↓"> ) para dar acelerar y frenar, respectivamente</li>
         </ul>
@@ -26,7 +30,13 @@
           Score: <span id="score_number">0</span>
         </h2>
       </div>
+      <div id="gameOver" class="d-flex flex-column justify-content-center" hidden>
+        <h2 class="fw-bolder text-center my-3">Game Over</h2>
+        <button onclick="window.location.reload()" id="refresh" class="btn btn-lg btn-success my-3">Jugar otra vez</button>
+
+      </div>
     </div>
+    <button onclick="toggleDebug()" id="debug_btn" class="fixed-bottom btn btn-lg btn-danger" hidden>Abrir Log de Valores</button>
   </body>
   <script src="./index.js"></script>
 </html>
