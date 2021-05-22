@@ -4,7 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link href="vendor/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
   </head>
-  <body></body>
+  <body class="container d-flex justify-content-center">
+    <div id="start" class="d-flex flex-column justify-content-center mt-5">
+      <h1 id="title">Bienvenido al juego de la moto!</h1>
+      <button onclick="startGame()" id="startButton" class="btn btn-lg btn-primary my-3">Iniciar</button>
+      <div id="instructions">
+        <h2>Instrucciones:</h2>
+        <ul>
+          <li>No deje que el motociclista choque contra las paredes</li>
+          <li>Utiliza las direccionales (<img class="icon" src="vendor/fontawesome/arrow-left-solid.svg" alt="←">, <img class="icon" src="vendor/fontawesome/arrow-right-solid.svg" alt="→"> ) para dar vueltas y ganar puntos</li>
+          <li>Utiliza las direccionales (<img class="icon" src="vendor/fontawesome/arrow-up-solid.svg" alt="↑">, <img class="icon" src="vendor/fontawesome/arrow-down-solid.svg" alt="↓"> ) para dar acelerar y frenar, respectivamente</li>
+        </ul>
+        <p><strong>¡Éxito!</strong></p>
+      </div>
+
+      <div id="score" class="align-self-center" hidden>
+        <h2 class="fw-bold">
+          Score: <span>0</span>
+        </h2>
+      </div>
+    </div>
+  </body>
   <script src="./index.js"></script>
 </html>
