@@ -3,6 +3,7 @@
 }
 #gameOver{
     visibility: collapse;
+    height: 0;
 }
 #values_list{
     max-height: 70vh;

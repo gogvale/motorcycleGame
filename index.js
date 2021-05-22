@@ -168,5 +168,6 @@ function startGame(){
   function gameOver(){
     c.remove();
     document.getElementById("gameOver").style.visibility = "visible"
+    document.getElementById("gameOver").style.height = "auto"
   }
 }
