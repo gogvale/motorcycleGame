@@ -123,7 +123,7 @@ function startGame(){
       ctx.rotate(this.rot);
       ctx.drawImage(this.img, -15, -15, 30, 30);
       ctx.restore();
-      setPosition(this.x,this.y)
+      setPosition(this.x,c.height - this.y - 15)
 
     };
   })();
