@@ -12,6 +12,10 @@ function appendToList(ul,i){
   li.textContent = i;
   ul.appendChild(li);
 }
+function setPosition(x,y){
+  document.getElementById("x").textContent = Math.round(x);
+  document.getElementById("y").textContent = Math.round(y);
+}
 function startGame(){
   document.getElementById("title").remove();
   document.getElementById("startButton").remove();
@@ -119,6 +123,8 @@ function startGame(){
       ctx.rotate(this.rot);
       ctx.drawImage(this.img, -15, -15, 30, 30);
       ctx.restore();
+      setPosition(this.x,this.y)
+
     };
   })();
 
@@ -130,8 +136,6 @@ function startGame(){
     if (player.x < 0) player.reset();
     speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.01;
     t += 10 * speed;
-    // ctx.fillStyle = "#19f";
-    // ctx.fillRect(0, 0, c.width, c.height);
 
     player.draw();
     player.bgPosX -= speed;
